@@ -2,6 +2,10 @@ version: 2
 
 jobs:
   build:
+    branches:
+      only:
+        - master
+        - /2_setup*.*/
     docker:
       - image: circleci/ruby:2.5.1
 
