@@ -5,7 +5,7 @@ jobs:
     branches:
       only:
         - master
-        - /2_setup*.*/
+        - /2-setup*.*/
     docker:
       - image: circleci/ruby:2.5.1
 
