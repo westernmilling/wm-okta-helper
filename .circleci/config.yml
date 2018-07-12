@@ -2,12 +2,6 @@ version: 2
 
 jobs:
   build:
-    environment:
-      CC_TEST_REPORTER_ID: b74f13bebf6bd3ce54e2085c0476208ecd24a4b5cec2e38684f4f31855e8e13c
-    branches:
-      only:
-        - master
-        - /2-setup*.*/
     docker:
       - image: circleci/ruby:2.5.1
 
