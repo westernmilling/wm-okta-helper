@@ -1,16 +1,29 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'okta/jwt/validation'
+require 'json/jwt'
+require 'okta_jwt_validation'
+require 'pry'
 require 'simplecov'
 
 SimpleCov.start
 
-RSpec.configure do |config|
-  # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = '.rspec_status'
+module Rails
+  def self.root
+    Pathname.new(File.expand_path(__dir__))
+  end
 
-  # Disable RSpec exposing methods globally on `Module` and `main`
+  def self.cache
+    @cache ||= ActiveSupport::Cache::MemoryStore.new
+  end
+
+  def self.env
+    'test'
+  end
+end
+
+RSpec.configure do |config|
+  config.example_status_persistence_file_path = '.rspec_status'
   config.disable_monkey_patching!
 
   config.expect_with :rspec do |c|
