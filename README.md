@@ -54,3 +54,8 @@ How to use:
         okta_client_id: Figaro.env.OKTA_CLIENT_ID
       ).call
 ```
+
+Where request is Rails ActionDispatch::Request to request a token.
+
+The response is a signed JSON Web Signature](https://github.com/nov/json-jwt/wiki/JWS).
+
