@@ -8,6 +8,7 @@ RSpec.describe OktaJwtValidation::AuthenticateApiRequest do
       let(:expected_request) do
         TestRequest.new
       end
+
       let(:okta_client_id) { 'yEqoXVxrwxFImVKHdtJF' }
 
       let(:subject) do
