@@ -4,5 +4,5 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-# Specify your gem's dependencies in okta_jwt_validation.gemspec
+# Specify your gem's dependencies in wm_okta_helper.gemspec
 gemspec

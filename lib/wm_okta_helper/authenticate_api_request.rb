@@ -4,7 +4,7 @@ require 'json/jwt'
 require 'jwt'
 require 'net/http'
 
-module OktaJwtValidation
+module WmOktaHelper
   class AuthenticateApiRequest
     def initialize(options)
       @request = options[:request]

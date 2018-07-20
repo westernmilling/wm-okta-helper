@@ -2,11 +2,14 @@
 
 require 'bundler/setup'
 require 'json/jwt'
-require 'okta_jwt_validation'
+require 'wm_okta_helper'
 require 'pry'
 require 'simplecov'
+require 'webmock/rspec'
 
 SimpleCov.start
+
+$LOAD_PATH << File.expand_path('/spec/support/fixtures/*.json')
 
 module Rails
   def self.root
@@ -28,5 +31,8 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+  config.mock_with :rspec do |mocks|
+    mocks.verify_partial_doubles = true
   end
 end
