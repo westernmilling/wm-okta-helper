@@ -2,7 +2,7 @@
 
 require 'support/test_request'
 
-RSpec.describe OktaJwtValidation::AuthenticateApiRequest do
+RSpec.describe WmOktaHelper::AuthenticateApiRequest do
   describe '#call' do
     context 'with correct credentials' do
       let(:expected_request) do
@@ -12,7 +12,7 @@ RSpec.describe OktaJwtValidation::AuthenticateApiRequest do
       let(:okta_client_id) { 'yEqoXVxrwxFImVKHdtJF' }
 
       let(:subject) do
-        OktaJwtValidation::AuthenticateApiRequest.new(
+        WmOktaHelper::AuthenticateApiRequest.new(
           request: expected_request,
           okta_org: 'westernmilling',
           okta_domain: 'okta',
@@ -36,7 +36,7 @@ RSpec.describe OktaJwtValidation::AuthenticateApiRequest do
       let(:okta_client_id) { 'wrong_key_here' }
 
       let(:subject) do
-        OktaJwtValidation::AuthenticateApiRequest.new(
+        WmOktaHelper::AuthenticateApiRequest.new(
           request: expected_request,
           okta_org: 'westernmilling',
           okta_domain: 'okta',
@@ -55,7 +55,7 @@ RSpec.describe OktaJwtValidation::AuthenticateApiRequest do
       end
 
       let(:subject) do
-        OktaJwtValidation::AuthenticateApiRequest.new(
+        WmOktaHelper::AuthenticateApiRequest.new(
           request: expected_request,
           okta_org: '',
           okta_domain: '',

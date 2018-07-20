@@ -3,11 +3,11 @@
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'okta_jwt_validation/version'
+require 'wm_okta_helper/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'okta_jwt_validation'
-  spec.version       = OktaJwtValidation::VERSION
+  spec.name          = 'wm_okta_helper'
+  spec.version       = WmOktaHelper::VERSION
 
   spec.authors       = ['Jose C Fernandez']
   spec.email         = ['jfernandez@westernmilling.com']

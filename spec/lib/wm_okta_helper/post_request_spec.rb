@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe OktaJwtValidation::PostRequest do
+RSpec.describe WmOktaHelper::PostRequest do
   describe '#call' do
     context 'with correct credentials' do
       let(:request_body) do
@@ -11,7 +11,7 @@ RSpec.describe OktaJwtValidation::PostRequest do
       end
 
       let(:subject) do
-        OktaJwtValidation::PostRequest.new(
+        WmOktaHelper::PostRequest.new(
           request_body: request_body,
           url: url
         ).call

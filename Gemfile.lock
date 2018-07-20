@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    okta_jwt_validation (0.2.0)
+    wm_okta_helper (0.2.0)
       json-jwt
       jwt
 
@@ -92,7 +92,6 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
-  okta_jwt_validation!
   pry-byebug
   rake (~> 10.0)
   rspec (~> 3.0)
@@ -100,6 +99,7 @@ DEPENDENCIES
   rubocop (~> 0.54.0)
   simplecov
   webmock
+  wm_okta_helper!
 
 BUNDLED WITH
    1.16.2

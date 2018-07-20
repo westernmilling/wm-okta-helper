@@ -1,4 +1,4 @@
-# okta_jwt_validation
+# wm_okta_helper
 
 
 Workflow:
@@ -19,7 +19,7 @@ The only App knowledge about Okta is the Figaro parameters.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'okta_jwt_validation'
+gem 'wm_okta_helper'
 ```
 
 And then execute:
@@ -28,14 +28,14 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install okta_jwt_validation
+    $ gem install wm_okta_helper
 
 ## Usage
 
 How to use:
 
 ```ruby
-      token = OktaJwtValidation::AuthenticateApiRequest.new(
+      token = WmOktaHelper::AuthenticateApiRequest.new(
         request: request,
         okta_org: Figaro.env.OKTA_ORG,
         okta_domain: Figaro.env.OKTA_DOMAIN,
@@ -55,7 +55,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/okta_jwt_validation. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/wm_okta_helper. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -63,7 +63,7 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the okta_jwt_validation project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/okta_jwt_validation/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the wm_okta_helper project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/wm_okta_helper/blob/master/CODE_OF_CONDUCT.md).
 
 
 

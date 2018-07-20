@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module OktaJwtValidation
+module WmOktaHelper
   class CreateSession
     def initialize(options)
       @username = options[:username]

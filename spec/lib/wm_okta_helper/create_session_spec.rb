@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe OktaJwtValidation::CreateSession do
+RSpec.describe WmOktaHelper::CreateSession do
   describe '#call' do
     let(:request_headers) do
       {
@@ -35,7 +35,7 @@ RSpec.describe OktaJwtValidation::CreateSession do
       end
 
       let(:subject) do
-        OktaJwtValidation::CreateSession.new(
+        WmOktaHelper::CreateSession.new(
           username: username,
           password: password,
           okta_org: 'westernmilling',
@@ -99,7 +99,7 @@ RSpec.describe OktaJwtValidation::CreateSession do
       end
 
       let(:subject) do
-        OktaJwtValidation::CreateSession.new(
+        WmOktaHelper::CreateSession.new(
           username: username,
           password: password,
           okta_org: 'westernmilling',

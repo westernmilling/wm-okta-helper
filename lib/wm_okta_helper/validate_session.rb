@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module OktaJwtValidation
+module WmOktaHelper
   class ValidateSession
     def initialize(options)
       @session_token = options[:sessionToken]

@@ -3,7 +3,7 @@
 require 'net/http'
 require 'uri'
 
-module OktaJwtValidation
+module WmOktaHelper
   class PostRequest
     def initialize(options)
       @request_body = options[:request_body]

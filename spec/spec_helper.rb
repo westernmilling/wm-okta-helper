@@ -2,7 +2,7 @@
 
 require 'bundler/setup'
 require 'json/jwt'
-require 'okta_jwt_validation'
+require 'wm_okta_helper'
 require 'pry'
 require 'simplecov'
 require 'webmock/rspec'
