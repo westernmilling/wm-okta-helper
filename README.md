@@ -1,8 +1,18 @@
 # okta_jwt_validation
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/okta_jwt_validation`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+Workflow:
+ - User using an App authenticates through front end using his own Okta credentials.
+ - User calls App API sending id token
+ - App uses gem to validate id token
+
+**If the wrapper is needed**
+ - App uses gem to get session token
+ - App calls Wm-mssql-wrapper  passing session token
+ - Wm-mssql-wrapper uses gem to validate session token.
+
+The only App knowledge about Okta is the Figaro parameters.
+
 
 ## Installation
 
@@ -22,7 +32,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+How to use:
+
+```ruby
+      token = OktaJwtValidation::AuthenticateApiRequest.new(
+        request: request,
+        okta_org: Figaro.env.OKTA_ORG,
+        okta_domain: Figaro.env.OKTA_DOMAIN,
+        okta_client_id: Figaro.env.OKTA_CLIENT_ID
+      ).call
+```
+
+Where request is Rails ActionDispatch::Request to request a token.
+
+The response is a signed [JSON Web Signature](https://github.com/nov/json-jwt/wiki/JWS).
 
 ## Development
 
@@ -44,18 +67,5 @@ Everyone interacting in the okta_jwt_validation project’s codebases, issue tra
 
 
 
-How to use:
 
-```ruby
-      token = OktaJwtValidation::AuthenticateApiRequest.new(
-        request: request,
-        okta_org: Figaro.env.OKTA_ORG,
-        okta_domain: Figaro.env.OKTA_DOMAIN,
-        okta_client_id: Figaro.env.OKTA_CLIENT_ID
-      ).call
-```
-
-Where request is Rails ActionDispatch::Request to request a token.
-
-The response is a signed JSON Web Signature](https://github.com/nov/json-jwt/wiki/JWS).
 
