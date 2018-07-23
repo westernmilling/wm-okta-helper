@@ -3,7 +3,7 @@
 module WmOktaHelper
   class ValidateSession
     def initialize(options)
-      @session_token = options[:sessionToken]
+      @request_object = options[:request]
       @okta_org = options[:okta_org]
       @okta_domain = options[:okta_domain]
     end
@@ -17,7 +17,7 @@ module WmOktaHelper
       token['userId'].present?
     end
 
-    attr_accessor :session_token, :okta_org, :okta_domain
+    attr_accessor :request_object, :okta_org, :okta_domain
 
     private
 
@@ -26,7 +26,7 @@ module WmOktaHelper
     end
 
     def request_body
-      { sessionToken: session_token }
+      { sessionToken: request_object.headers['Authorization'] }
     end
   end
 end

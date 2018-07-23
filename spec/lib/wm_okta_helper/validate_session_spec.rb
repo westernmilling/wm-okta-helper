@@ -2,32 +2,17 @@
 
 RSpec.describe WmOktaHelper::ValidateSession do
   describe '#call' do
-    let(:request_headers) do
-      {
-        'Accept' => 'application/json',
-        'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-        'Cache-Control' => 'no-cache',
-        'Content-Type' => 'application/json',
-        'Host' => 'westernmilling.okta.com',
-        'User-Agent' => 'Ruby'
-      }
+    let(:request) do
+      double('request2', headers: { 'Authorization' => '20111I3t5tqftiI1X70O' })
     end
-    context 'with correct credentials' do
-      let(:session_token) do
-        '20111I3t5tqftiI1X70O'
-      end
 
+    context 'with correct credentials' do
       let(:subject) do
         WmOktaHelper::ValidateSession.new(
-          sessionToken: session_token,
+          request: request,
           okta_org: 'westernmilling',
           okta_domain: 'okta'
         ).call
-      end
-
-      let(:full_request) do
-        { body: '{"sessionToken":"20111I3t5tqftiI1X70O"}',
-          headers: request_headers }
       end
 
       let(:fixture_file) { 'validate_session_success.json' }
@@ -38,16 +23,13 @@ RSpec.describe WmOktaHelper::ValidateSession do
 
       it 'returns expected message hash' do
         stub_request(:post, 'https://westernmilling.okta.com/api/v1/sessions')
-          .with(full_request)
           .to_return(status: 200, body: response_body, headers: {})
 
         expect(subject).to eq true
       end
     end
+
     context 'with incorrect credentials' do
-      let(:session_token) do
-        'such_a_bad_token'
-      end
       let(:fixture_file) { 'validate_session_failure.json' }
 
       let(:response_body) do
@@ -56,7 +38,7 @@ RSpec.describe WmOktaHelper::ValidateSession do
 
       let(:subject) do
         WmOktaHelper::ValidateSession.new(
-          sessionToken: session_token,
+          request: request,
           okta_org: 'westernmilling',
           okta_domain: 'okta'
         ).call
@@ -64,10 +46,6 @@ RSpec.describe WmOktaHelper::ValidateSession do
 
       it 'returns expected message hash' do
         stub_request(:post, 'https://westernmilling.okta.com/api/v1/sessions')
-          .with(
-            body: '{"sessionToken":"such_a_bad_token"}',
-            headers: request_headers
-          )
           .to_return(status: 401, body: response_body, headers: {})
 
         expect(subject).to eq false
