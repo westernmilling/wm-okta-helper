@@ -25,7 +25,10 @@ RSpec.describe WmOktaHelper::ValidateSession do
         stub_request(:post, 'https://westernmilling.okta.com/api/v1/sessions')
           .to_return(status: 200, body: response_body, headers: {})
 
-        expect(subject).to eq true
+        expect(subject).to eq(
+          user_id: '00u1b364ylUITlaQ22p7',
+          name: 'Jose Fernandez'
+        )
       end
     end
 
@@ -48,7 +51,7 @@ RSpec.describe WmOktaHelper::ValidateSession do
         stub_request(:post, 'https://westernmilling.okta.com/api/v1/sessions')
           .to_return(status: 401, body: response_body, headers: {})
 
-        expect(subject).to eq false
+        expect(subject).to eq nil
       end
     end
   end

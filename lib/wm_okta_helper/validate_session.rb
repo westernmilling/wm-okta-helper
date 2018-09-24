@@ -14,7 +14,10 @@ module WmOktaHelper
         request_body: request_body
       ).call
 
-      token['userId'].present?
+      return {
+        user_id: token['userId'],
+        name: token['_links']['user']['name']
+      } if token['userId'].present?
     end
 
     attr_accessor :request_object, :okta_org, :okta_domain
