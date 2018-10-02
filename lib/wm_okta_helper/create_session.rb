@@ -7,6 +7,7 @@ module WmOktaHelper
     end
 
     def call
+      check_options
       raise 'Not authorized' if response['sessionToken'].blank?
       response
     end
@@ -30,7 +31,7 @@ module WmOktaHelper
     end
 
     def url
-      "https://#{okta_org}.#{okta_domain}.com/api/v1/authn"
+      "https://#{@okta_org}.#{@okta_domain}.com/api/v1/authn"
     end
 
     def request_body
