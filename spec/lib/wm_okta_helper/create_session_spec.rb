@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
-
 RSpec.describe WmOktaHelper::CreateSession do
   describe '#call' do
     let(:subject) do
