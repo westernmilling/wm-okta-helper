@@ -22,7 +22,7 @@ module WmOktaHelper
     end
 
     def endpoint
-      "/api/v1/users/#{@user}/groups"
+      "api/v1/users/#{@user}/groups"
     end
 
     def request_url
@@ -44,8 +44,8 @@ module WmOktaHelper
     end
 
     def fetch_data
-      uri = URI.parse(request_url)
-      request = Net::HTTP::Get.new(uri)
+      uri = URI.parse(site)
+      request = Net::HTTP::Get.new(request_url)
       request.content_type = 'application/json'
       request['Accept'] = 'application/json'
       request['Authorization'] = "SSWS #{@api_key}"
