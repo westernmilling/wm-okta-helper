@@ -38,8 +38,9 @@ module WmOktaHelper
         groups = []
         fetch_data.each do |g|
           group_name = g.dig('profile', 'name')
-          groups << group_name if group_name.includes('otto_')
+          groups << group_name if group_name.include?('otto_')
         end
+        groups
       end
     end
 
