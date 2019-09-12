@@ -46,17 +46,20 @@ module WmOktaHelper
 
     def fetch_data
       uri = URI.parse(site)
-      request = Net::HTTP::Get.new(request_url)
-      request.content_type = 'application/json'
-      request['Accept'] = 'application/json'
-      request['Authorization'] = "SSWS #{@api_key}"
-
       req_options = { use_ssl: uri.scheme == 'https' }
 
       response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
         http.request(request)
       end
       response.body.present? ? JSON.parse(response.body) : []
+    end
+
+    def request
+      @request ||= Net::HTTP::Get.new(request_url)
+      @request.content_type = 'application/json'
+      @request['Accept'] = 'application/json'
+      @request['Authorization'] = "SSWS #{@api_key}"
+      @request
     end
   end
 end
