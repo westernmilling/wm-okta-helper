@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    wm_okta_helper (0.2.4)
+    wm_okta_helper (0.2.6)
       json-jwt
       jwt
 
