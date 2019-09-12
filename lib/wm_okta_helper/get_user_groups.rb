@@ -29,19 +29,13 @@ module WmOktaHelper
       URI("#{site}/#{endpoint}")
     end
 
-    def cache_key
-      "user-groups-#{@user}"
-    end
-
     def okta_groups
-      Rails.cache.fetch(cache_key, expires_in: 1.hour) do
-        groups = []
-        fetch_data.each do |g|
-          group_name = g.dig('profile', 'name')
-          groups << group_name if group_name.include?('otto_')
-        end
-        groups
+      groups = []
+      fetch_data.each do |g|
+        group_name = g.dig('profile', 'name')
+        groups << group_name if group_name.include?('otto_')
       end
+      groups
     end
 
     def fetch_data
