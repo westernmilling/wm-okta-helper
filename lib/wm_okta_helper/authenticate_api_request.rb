@@ -76,7 +76,7 @@ module WmOktaHelper
       @token = parse_token
       if @token['iss'] != site ||
          @token['aud'] != client_id ||
-         Time.strptime(@token['exp'].to_s, '%s') < Time.now.utc
+         @token['exp'].to_i < Time.now.utc.to_i
         return false
       else
         return true

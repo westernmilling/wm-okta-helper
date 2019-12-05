@@ -10,7 +10,7 @@ class TestRequest
     Rails.cache.write(
       'OKTA_PUBLIC_KEYS', {
         @kid => @public_key.to_jwk.except('alg')
-      }, expires_in: 1.month
+      }, expires_in: 3.months
     )
   end
 
