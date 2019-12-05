@@ -79,6 +79,7 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
     thread_safe (0.3.6)
+    timecop (0.9.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     unicode-display_width (1.4.0)
@@ -91,15 +92,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.16)
+  bundler (~> 2.0.2)
   pry-byebug
   rake (~> 10.0)
   rspec (~> 3.0)
   rspec_junit_formatter
   rubocop (~> 0.54.0)
   simplecov
+  timecop
   webmock
   wm_okta_helper!
 
 BUNDLED WITH
-   1.16.6
+   2.0.2

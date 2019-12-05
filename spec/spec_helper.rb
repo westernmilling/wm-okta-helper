@@ -5,6 +5,7 @@ require 'json/jwt'
 require 'wm_okta_helper'
 require 'pry'
 require 'simplecov'
+require 'timecop'
 require 'webmock/rspec'
 
 SimpleCov.start
