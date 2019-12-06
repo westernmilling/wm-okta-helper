@@ -48,6 +48,7 @@ module WmOktaHelper
 
     def okta_keys
       Rails.cache.fetch(cache_key, expires_in: 1.month) do
+        Rails.logger.info('Okta keys cache miss')
         okta_keys = {}
         uri = URI("#{site}/oauth2/v1/keys")
         data = Net::HTTP.get(uri)
