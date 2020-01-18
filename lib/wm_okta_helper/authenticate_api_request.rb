@@ -48,7 +48,6 @@ module WmOktaHelper
 
     def okta_keys
       Rails.cache.fetch(cache_key, expires_in: 1.month) do
-        Rails.logger.info('Okta keys cache miss')
         okta_keys = {}
         uri = URI("#{site}/oauth2/v1/keys")
         data = Net::HTTP.get(uri)
@@ -77,7 +76,7 @@ module WmOktaHelper
       @token = parse_token
       if @token['iss'] != site ||
          @token['aud'] != client_id ||
-         @token['exp'].to_i < Time.now.utc.to_i
+         (@token['exp'].to_i < Time.now.utc.to_i && !Rails.env == 'react_test')
         return false
       else
         return true
