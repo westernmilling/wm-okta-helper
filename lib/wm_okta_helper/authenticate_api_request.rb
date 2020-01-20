@@ -75,13 +75,15 @@ module WmOktaHelper
 
     def token_valid?
       @token = parse_token
-      if @token['iss'] != site ||
-         @token['aud'] != client_id ||
-         (@token['exp'].to_i < Time.now.utc.to_i && Rails.env != 'react_test')
-        return false
-      else
-        return true
-      end
+      return false if check_token
+
+      true
+    end
+
+    def check_token
+      @token['iss'] != site ||
+        @token['aud'] != client_id ||
+        (@token['exp'].to_i < Time.now.utc.to_i && Rails.env != 'react_test')
     end
   end
 end
