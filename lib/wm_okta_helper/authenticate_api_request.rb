@@ -12,6 +12,7 @@ module WmOktaHelper
       @okta_org = options[:okta_org]
       @okta_domain = options[:okta_domain]
       @okta_client_id = options[:okta_client_id]
+      @ignore_expiration = options[:ignore_expiration] || false
     end
 
     def call
@@ -75,15 +76,9 @@ module WmOktaHelper
 
     def token_valid?
       @token = parse_token
-      return false if check_token
-
-      true
-    end
-
-    def check_token
-      @token['iss'] != site ||
-        @token['aud'] != client_id ||
-        (@token['exp'].to_i < Time.now.utc.to_i && Rails.env != 'react_test')
+      @token['iss'] == site &&
+        @token['aud'] == client_id &&
+        (@token['exp'].to_i >= Time.now.utc.to_i || @ignore_expiration)
     end
   end
 end
