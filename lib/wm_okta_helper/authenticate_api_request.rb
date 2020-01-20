@@ -76,7 +76,7 @@ module WmOktaHelper
       @token = parse_token
       if @token['iss'] != site ||
          @token['aud'] != client_id ||
-         (@token['exp'].to_i < Time.now.utc.to_i && !Rails.env == 'react_test')
+         (@token['exp'].to_i < Time.now.utc.to_i && Rails.env != 'react_test')
         return false
       else
         return true
