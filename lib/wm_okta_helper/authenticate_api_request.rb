@@ -12,7 +12,7 @@ module WmOktaHelper
       @okta_org = options[:okta_org]
       @okta_domain = options[:okta_domain]
       @okta_client_id = options[:okta_client_id]
-      @ignore_expiration = options[:ignore_expiration] || false
+      @ignore_validations = options[:ignore_validations] || false
     end
 
     def call
@@ -61,6 +61,12 @@ module WmOktaHelper
 
     def parse_token
       JSON::JWT.decode request_token, public_key
+    rescue JWT::ExpiredSignature => e
+      if @ignore_validations
+        JSON::JWT.decode request_token, :skip_verification
+      else
+        raise e
+      end
     rescue StandardError
       JSON::JWT.decode request_token, public_key(true)
     end
@@ -76,9 +82,11 @@ module WmOktaHelper
 
     def token_valid?
       @token = parse_token
-      @token['iss'] == site &&
+      @ignore_validations || (
+        @token['iss'] == site &&
         @token['aud'] == client_id &&
-        (@token['exp'].to_i >= Time.now.utc.to_i || @ignore_expiration)
+        @token['exp'].to_i >= Time.now.utc.to_i
+      )
     end
   end
 end
