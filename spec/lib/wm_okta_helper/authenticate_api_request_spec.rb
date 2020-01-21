@@ -63,7 +63,7 @@ RSpec.describe WmOktaHelper::AuthenticateApiRequest do
           WmOktaHelper::AuthenticateApiRequest.new(no_validations_options).call
         end
 
-        it 'returns nil' do
+        it 'returns expected message hash' do
           Timecop.freeze do
             result = subject
             expect(result).to have_key('iss')
