@@ -6,7 +6,7 @@ inherit_from:
 Rails:
   Enabled: true
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.5.1
   Exclude:
     - "vendor/**/*"
     - bin/*
@@ -20,6 +20,8 @@ Layout/DotPosition:
   SupportedStyles:
   - leading
   - trailing
+Metrics/BlockLength:
+  Enabled: false
 Layout/EmptyLineAfterMagicComment:
   Description: 'Add an empty line after magic comments to separate them from code.'
   StyleGuide: '#separate-magic-comments-from-code'
