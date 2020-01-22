@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'support/test_request'
+require 'support/test_request_expired'
 
 RSpec.describe WmOktaHelper::AuthenticateApiRequest do
   describe '#call' do
@@ -54,7 +55,7 @@ RSpec.describe WmOktaHelper::AuthenticateApiRequest do
     end
 
     context 'with expired token' do
-      let!(:expected_request) { TestRequest.new(expired: true) }
+      let!(:expected_request) { TestRequestExpired.new }
       context 'with validations' do
         it 'returns nil' do
           Timecop.freeze do
