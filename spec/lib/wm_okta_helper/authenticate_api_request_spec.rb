@@ -16,10 +16,6 @@ RSpec.describe WmOktaHelper::AuthenticateApiRequest do
       }
     end
 
-    let!(:no_validations_options) do
-      validations_options.merge(ignore_validations: true)
-    end
-
     let!(:subject) do
       WmOktaHelper::AuthenticateApiRequest.new(validations_options).call
     end
@@ -58,7 +54,20 @@ RSpec.describe WmOktaHelper::AuthenticateApiRequest do
     end
 
     context 'with expired token' do
+      let!(:expected_request) { TestRequest.new(expired: true) }
+      context 'with validations' do
+        it 'returns nil' do
+          Timecop.freeze do
+            result = subject
+            expect(result).to be_nil
+          end
+        end
+      end
+
       context 'without validations' do
+        let!(:no_validations_options) do
+          validations_options.merge(ignore_validations: true)
+        end
         let!(:subject) do
           WmOktaHelper::AuthenticateApiRequest.new(no_validations_options).call
         end
@@ -70,7 +79,7 @@ RSpec.describe WmOktaHelper::AuthenticateApiRequest do
             expect(result).to have_key('aud')
             expect(result['aud']).to eq okta_client_id
             expect(result['iss']).to eq 'https://westernmilling.okta.com'
-            expect(subject['exp'].to_i).to eq((Time.now.utc + 1.month).to_i)
+            expect(subject['exp'].to_i).to eq((Time.now.utc - 1.month).to_i)
           end
         end
       end

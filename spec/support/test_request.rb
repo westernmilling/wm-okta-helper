@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class TestRequest
-  def initialize
+  def initialize(expired: false)
+    @expired = expired
     @private_key = OpenSSL::PKey::RSA.generate(2048)
     @public_key = @private_key.public_key
     @kid = @public_key.to_jwk['kid']
@@ -17,11 +18,12 @@ class TestRequest
   attr_reader :kid, :public_key, :key, :id_token
 
   def payload
+    exp = @expired ? Time.now.utc - 1.month : Time.now.utc + 1.month
     {
       'iss': 'https://westernmilling.okta.com',
       'sub': SecureRandom.uuid,
       'aud': 'yEqoXVxrwxFImVKHdtJF',
-      'exp': (Time.current + 1.month).to_i,
+      'exp': exp.to_i,
       'name': 'Sam Adams',
       'email': 'sam@adams.com',
       'iat': Time.current.to_i
