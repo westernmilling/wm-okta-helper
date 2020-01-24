@@ -8,7 +8,7 @@ module WmOktaHelper
 
     def call
       check_options
-      raise 'Not authorized' if response['sessionToken'].blank?
+      fail 'Not authorized' if response['sessionToken'].blank?
       response
     end
 
@@ -23,7 +23,7 @@ module WmOktaHelper
     def check_options
       missing_options = available_options.select { |o| @options[o].blank? }
       if missing_options.present?
-        raise "Missing configuration variable: #{missing_options}"
+        fail "Missing configuration variable: #{missing_options}"
       end
       available_options.each do |o|
         instance_variable_set("@#{o}", @options[o])
